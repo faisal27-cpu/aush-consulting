@@ -18,21 +18,30 @@ const values = [
 
 export function ValuesSection() {
   return (
-    <section
-      className="py-24 border-t"
-      style={{ backgroundColor: "#111113", borderColor: "#1C1C1F" }}
-    >
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="mb-12">
+    <section style={{ backgroundColor: "#FFFFFF", padding: "96px 0" }}>
+      <div className="max-w-7xl mx-auto px-8">
+        <div className="mb-16">
           <p
-            className="font-mono text-xs uppercase tracking-widest mb-3"
-            style={{ color: "#00C2A8" }}
+            style={{
+              fontFamily: "var(--font-inter)",
+              fontSize: "11px",
+              letterSpacing: "0.2em",
+              color: "#9B9B9B",
+              textTransform: "uppercase",
+              marginBottom: "16px",
+            }}
           >
             How We Work
           </p>
           <h2
-            className="text-3xl md:text-4xl font-bold tracking-tight"
-            style={{ color: "#F5F5F5" }}
+            style={{
+              fontFamily: "var(--font-playfair)",
+              fontSize: "clamp(36px, 4vw, 48px)",
+              fontWeight: 500,
+              color: "#0A0A0A",
+              lineHeight: 1.15,
+              letterSpacing: "-0.02em",
+            }}
           >
             Three things we
             <br />
@@ -40,22 +49,41 @@ export function ValuesSection() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-l" style={{ borderColor: "#E2E0DA" }}>
           {values.map((value) => (
             <div
               key={value.title}
-              className="pl-6 border-l-2"
-              style={{ borderColor: "#00C2A8" }}
+              className="border-r border-b"
+              style={{ padding: "40px", borderColor: "#E2E0DA" }}
             >
+              <div
+                style={{
+                  width: "100%",
+                  height: "1px",
+                  backgroundColor: "#0A0A0A",
+                  marginBottom: "32px",
+                }}
+              />
               <h3
-                className="text-lg font-semibold"
-                style={{ color: "#F5F5F5" }}
+                style={{
+                  fontFamily: "var(--font-playfair)",
+                  fontSize: "22px",
+                  fontWeight: 500,
+                  color: "#0A0A0A",
+                  letterSpacing: "-0.01em",
+                  marginBottom: "16px",
+                }}
               >
                 {value.title}
               </h3>
               <p
-                className="text-sm mt-2 leading-relaxed"
-                style={{ color: "#A1A1AA" }}
+                style={{
+                  fontFamily: "var(--font-inter)",
+                  fontSize: "15px",
+                  color: "#6B6B6B",
+                  lineHeight: 1.65,
+                  fontWeight: 300,
+                }}
               >
                 {value.description}
               </p>

@@ -1,73 +1,116 @@
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+
+const marqueeText =
+  "Financial Services\u00a0\u00a0·\u00a0\u00a0Healthcare\u00a0\u00a0·\u00a0\u00a0SaaS\u00a0\u00a0·\u00a0\u00a0Manufacturing\u00a0\u00a0·\u00a0\u00a0Logistics\u00a0\u00a0·\u00a0\u00a0Retail\u00a0\u00a0·\u00a0\u00a0Legal\u00a0\u00a0·\u00a0\u00a0Real Estate\u00a0\u00a0·\u00a0\u00a0"
 
 export function HeroSection() {
   return (
     <section
-      className="relative min-h-[88vh] flex items-center overflow-hidden"
-      style={{ backgroundColor: "#0C0C0E" }}
+      className="flex flex-col"
+      style={{ backgroundColor: "#F5F4F0", minHeight: "100vh" }}
     >
-      {/* Dot grid background */}
-      <div className="absolute inset-0 hero-dot-grid opacity-60" />
-      {/* Teal glow */}
-      <div className="absolute inset-0 teal-glow" />
+      <div className="flex-1 max-w-5xl mx-auto px-8 w-full flex flex-col justify-center py-32">
+        <p
+          style={{
+            fontFamily: "var(--font-inter)",
+            fontSize: "11px",
+            letterSpacing: "0.2em",
+            color: "#9B9B9B",
+            textTransform: "uppercase",
+            marginBottom: "32px",
+          }}
+        >
+          AI Consulting
+        </p>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-32 w-full">
-        <div className="max-w-4xl">
-          {/* Label */}
-          <div className="flex items-center gap-2 mb-6">
-            <span
-              className="font-mono text-xs tracking-widest uppercase px-3 py-1 rounded-full border"
-              style={{
-                color: "#00C2A8",
-                borderColor: "rgba(0,194,168,0.2)",
-                backgroundColor: "rgba(0,194,168,0.05)",
-              }}
-            >
-              AI Consulting
-            </span>
-          </div>
+        <h1
+          style={{
+            fontFamily: "var(--font-playfair)",
+            fontSize: "clamp(48px, 7vw, 72px)",
+            fontWeight: 500,
+            color: "#0A0A0A",
+            lineHeight: 1.1,
+            letterSpacing: "-0.02em",
+            marginBottom: "32px",
+          }}
+        >
+          We turn AI
+          <br />
+          from experiment
+          <br />
+          to enterprise
+          <br />
+          advantage.
+        </h1>
 
-          {/* Headline */}
-          <h1
-            className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] gradient-headline"
+        <p
+          style={{
+            fontFamily: "var(--font-inter)",
+            fontSize: "18px",
+            color: "#6B6B6B",
+            fontWeight: 300,
+            lineHeight: 1.6,
+            maxWidth: "480px",
+            marginBottom: "40px",
+          }}
+        >
+          AUSH Consulting works with growth-stage and enterprise companies to
+          design, build, and deploy AI that creates measurable outcomes — not
+          demos.
+        </p>
+
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Link
+            href="/contact"
+            style={{
+              fontFamily: "var(--font-inter)",
+              fontSize: "14px",
+              fontWeight: 500,
+              backgroundColor: "#0A0A0A",
+              color: "#FFFFFF",
+              padding: "16px 32px",
+              display: "inline-block",
+            }}
           >
-            We Build AI
-            <br />
-            That Works
-          </h1>
-
-          {/* Subheadline */}
-          <p
-            className="text-lg md:text-xl mt-6 max-w-2xl leading-relaxed"
-            style={{ color: "#A1A1AA" }}
+            Start a conversation →
+          </Link>
+          <Link
+            href="/services"
+            style={{
+              fontFamily: "var(--font-inter)",
+              fontSize: "14px",
+              fontWeight: 400,
+              backgroundColor: "transparent",
+              color: "#0A0A0A",
+              padding: "16px 32px",
+              display: "inline-block",
+              border: "1px solid #E2E0DA",
+            }}
           >
-            AUSH Consulting partners with growth-stage and enterprise companies
-            to design, build, and deploy AI systems that create measurable
-            business outcomes — not demos.
-          </p>
+            See our work
+          </Link>
+        </div>
+      </div>
 
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 mt-10">
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg text-sm font-medium transition-all hover:opacity-90"
-              style={{ backgroundColor: "#00C2A8", color: "#0C0C0E" }}
-            >
-              Get Started
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              href="/services"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg text-sm font-medium border transition-colors hover:border-[#2A2A2F]"
-              style={{
-                borderColor: "#1C1C1F",
-                color: "#F5F5F5",
-                backgroundColor: "transparent",
-              }}
-            >
-              See Our Services
-            </Link>
+      <div style={{ borderTop: "1px solid #E2E0DA" }}>
+        <div className="overflow-hidden py-6">
+          <div className="marquee-track flex whitespace-nowrap">
+            {[0, 1].map((i) => (
+              <span
+                key={i}
+                style={{
+                  fontFamily: "var(--font-inter)",
+                  fontSize: "11px",
+                  letterSpacing: "0.2em",
+                  color: "#9B9B9B",
+                  textTransform: "uppercase",
+                  flexShrink: 0,
+                  paddingRight: "0",
+                }}
+              >
+                {marqueeText}
+              </span>
+            ))}
           </div>
         </div>
       </div>

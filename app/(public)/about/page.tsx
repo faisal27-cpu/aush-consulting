@@ -12,29 +12,44 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      {/* Hero */}
-      <section
-        className="py-24 border-b relative overflow-hidden"
-        style={{ backgroundColor: "#0C0C0E", borderColor: "#1C1C1F" }}
-      >
-        <div className="absolute inset-0 hero-dot-grid opacity-40" />
-        <div className="relative z-10 max-w-6xl mx-auto px-6">
+      <section style={{ backgroundColor: "#F5F4F0", padding: "96px 0 80px" }}>
+        <div className="max-w-7xl mx-auto px-8">
           <p
-            className="font-mono text-xs uppercase tracking-widest mb-4"
-            style={{ color: "#00C2A8" }}
+            style={{
+              fontFamily: "var(--font-inter)",
+              fontSize: "11px",
+              letterSpacing: "0.2em",
+              color: "#9B9B9B",
+              textTransform: "uppercase",
+              marginBottom: "24px",
+            }}
           >
             Our Story
           </p>
           <h1
-            className="text-4xl md:text-5xl font-bold tracking-tight max-w-3xl leading-tight"
-            style={{ color: "#F5F5F5" }}
+            style={{
+              fontFamily: "var(--font-playfair)",
+              fontSize: "clamp(40px, 5vw, 64px)",
+              fontWeight: 500,
+              color: "#0A0A0A",
+              lineHeight: 1.1,
+              letterSpacing: "-0.02em",
+              maxWidth: "720px",
+              marginBottom: "32px",
+            }}
           >
             We started AUSH because too many AI projects fail for the wrong
             reasons
           </h1>
           <p
-            className="text-lg mt-6 max-w-2xl leading-relaxed"
-            style={{ color: "#A1A1AA" }}
+            style={{
+              fontFamily: "var(--font-inter)",
+              fontSize: "18px",
+              color: "#6B6B6B",
+              fontWeight: 300,
+              lineHeight: 1.65,
+              maxWidth: "600px",
+            }}
           >
             The problem isn&apos;t the technology. It&apos;s consultancies that
             optimize for billable hours instead of outcomes, and engineers who
@@ -44,6 +59,8 @@ export default function AboutPage() {
           </p>
         </div>
       </section>
+
+      <div style={{ borderTop: "1px solid #E2E0DA" }} />
 
       <TeamGrid />
       <ValuesSection />

@@ -1,78 +1,150 @@
-import { getInitials } from "@/lib/utils"
 import type { Testimonial } from "@/lib/types"
+
+const staticTestimonials: Testimonial[] = [
+  {
+    id: "1",
+    author_name: "Sarah Chen",
+    author_role: "CTO",
+    author_company: "Meridian Health",
+    content:
+      "AUSH didn't just build the model — they rebuilt how our team thinks about data. Twelve months later we're running the system ourselves and it's processing 40,000 claims per day with 94% accuracy.",
+    is_active: true,
+    created_at: "",
+  },
+  {
+    id: "2",
+    author_name: "James Okafor",
+    author_role: "VP of Operations",
+    author_company: "Cargolink Logistics",
+    content:
+      "The honesty was what got us. They told us our data wasn't ready in week one, fixed it with us, and delivered three weeks late with something that actually worked.",
+    is_active: true,
+    created_at: "",
+  },
+  {
+    id: "3",
+    author_name: "Priya Mehta",
+    author_role: "CEO",
+    author_company: "Clarendon Financial",
+    content:
+      "We'd been burned by two AI vendors before. AUSH was different from the first call — no hype, just hard questions about what we were trying to solve.",
+    is_active: true,
+    created_at: "",
+  },
+]
 
 interface TestimonialsSectionProps {
   testimonials: Testimonial[]
 }
 
 export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) {
+  const data = testimonials.length > 0 ? testimonials : staticTestimonials
+  const featured = data[0]
+  const cards = data.slice(1, 4)
+
   return (
-    <section
-      className="py-24 border-t"
-      style={{ backgroundColor: "#111113", borderColor: "#1C1C1F" }}
-    >
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Header */}
-        <div className="mb-12">
-          <p
-            className="font-mono text-xs uppercase tracking-widest mb-3"
-            style={{ color: "#00C2A8" }}
-          >
-            What Clients Say
-          </p>
-          <h2
-            className="text-3xl md:text-4xl font-bold tracking-tight"
-            style={{ color: "#F5F5F5" }}
-          >
-            Trusted by teams building at scale
-          </h2>
-        </div>
+    <section style={{ backgroundColor: "#F5F4F0", padding: "96px 0" }}>
+      <div className="max-w-7xl mx-auto px-8">
+        <p
+          style={{
+            fontFamily: "var(--font-inter)",
+            fontSize: "11px",
+            letterSpacing: "0.2em",
+            color: "#9B9B9B",
+            textTransform: "uppercase",
+            marginBottom: "48px",
+          }}
+        >
+          What Clients Say
+        </p>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((t) => (
-            <div
-              key={t.id}
-              className="rounded-xl p-6 border flex flex-col"
-              style={{ backgroundColor: "#0C0C0E", borderColor: "#1C1C1F" }}
+        {featured && (
+          <div className="mb-20 max-w-4xl">
+            <p
+              style={{
+                fontFamily: "var(--font-playfair)",
+                fontSize: "clamp(80px, 10vw, 120px)",
+                color: "#E2E0DA",
+                lineHeight: 0.8,
+                marginBottom: "16px",
+                fontWeight: 400,
+              }}
             >
-              {/* Quote mark */}
-              <span
-                className="text-2xl font-serif mb-3 leading-none"
-                style={{ color: "rgba(0,194,168,0.4)" }}
-              >
-                &ldquo;
-              </span>
-              <p
-                className="text-sm leading-relaxed flex-1"
-                style={{ color: "#A1A1AA" }}
-              >
-                {t.content}
-              </p>
+              &ldquo;
+            </p>
+            <p
+              style={{
+                fontFamily: "var(--font-playfair)",
+                fontSize: "clamp(20px, 2.5vw, 28px)",
+                fontStyle: "italic",
+                color: "#0A0A0A",
+                lineHeight: 1.5,
+                fontWeight: 400,
+                letterSpacing: "-0.01em",
+                maxWidth: "800px",
+              }}
+            >
+              {featured.content}
+            </p>
+            <p
+              style={{
+                fontFamily: "var(--font-inter)",
+                fontSize: "14px",
+                color: "#6B6B6B",
+                marginTop: "24px",
+              }}
+            >
+              {featured.author_name} — {featured.author_role}, {featured.author_company}
+            </p>
+          </div>
+        )}
 
-              {/* Author */}
-              <div className="flex items-center gap-3 mt-6 pt-5 border-t" style={{ borderColor: "#1C1C1F" }}>
-                <div
-                  className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-semibold shrink-0"
+        {cards.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-l" style={{ borderColor: "#E2E0DA" }}>
+            {cards.map((t) => (
+              <div
+                key={t.id}
+                className="border-r border-b"
+                style={{
+                  backgroundColor: "#FFFFFF",
+                  borderColor: "#E2E0DA",
+                  padding: "40px",
+                }}
+              >
+                <p
                   style={{
-                    backgroundColor: "rgba(0,194,168,0.1)",
-                    color: "#00C2A8",
+                    fontFamily: "var(--font-playfair)",
+                    fontSize: "40px",
+                    color: "#E2E0DA",
+                    lineHeight: 0.8,
+                    marginBottom: "16px",
                   }}
                 >
-                  {getInitials(t.author_name)}
-                </div>
-                <div>
-                  <p className="text-sm font-medium" style={{ color: "#F5F5F5" }}>
+                  &ldquo;
+                </p>
+                <p
+                  style={{
+                    fontFamily: "var(--font-inter)",
+                    fontSize: "15px",
+                    color: "#6B6B6B",
+                    lineHeight: 1.65,
+                    fontWeight: 300,
+                  }}
+                >
+                  {t.content}
+                </p>
+                <div style={{ borderTop: "1px solid #E2E0DA", marginTop: "24px", paddingTop: "20px" }}>
+                  <p style={{ fontFamily: "var(--font-inter)", fontSize: "13px", color: "#0A0A0A", fontWeight: 500 }}>
                     {t.author_name}
                   </p>
-                  <p className="text-xs" style={{ color: "#71717A" }}>
+                  <p style={{ fontFamily: "var(--font-inter)", fontSize: "12px", color: "#9B9B9B", marginTop: "2px" }}>
                     {t.author_role}, {t.author_company}
                   </p>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   )

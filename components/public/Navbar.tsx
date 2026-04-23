@@ -17,54 +17,63 @@ export function Navbar() {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 border-b"
-      style={{
-        backgroundColor: "rgba(12,12,14,0.85)",
-        backdropFilter: "blur(12px)",
-        borderColor: "#1C1C1F",
-      }}
+      className="sticky top-0 z-50 border-b"
+      style={{ backgroundColor: "#F5F4F0", borderColor: "#E2E0DA" }}
     >
-      <nav className="max-w-6xl mx-auto px-6 h-[60px] flex items-center justify-between">
-        {/* Logo */}
+      <nav className="max-w-7xl mx-auto px-8 h-[64px] flex items-center justify-between">
         <Link
           href="/"
-          className="font-mono text-lg font-bold tracking-tight"
-          style={{ color: "#00C2A8" }}
+          style={{
+            fontFamily: "var(--font-playfair)",
+            fontSize: "20px",
+            fontWeight: 600,
+            color: "#0A0A0A",
+            letterSpacing: "-0.02em",
+          }}
         >
           AUSH
         </Link>
 
-        {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-10">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm transition-colors"
               style={{
-                color: pathname === link.href ? "#F5F5F5" : "#A1A1AA",
+                fontFamily: "var(--font-inter)",
+                fontSize: "14px",
+                color: pathname === link.href ? "#0A0A0A" : "#6B6B6B",
+                fontWeight: pathname === link.href ? 500 : 400,
+                transition: "color 0.15s",
               }}
+              onMouseEnter={(e) => { (e.target as HTMLElement).style.color = "#0A0A0A" }}
+              onMouseLeave={(e) => { (e.target as HTMLElement).style.color = pathname === link.href ? "#0A0A0A" : "#6B6B6B" }}
             >
               {link.label}
             </Link>
           ))}
         </div>
 
-        {/* Desktop CTA */}
         <div className="hidden md:flex">
           <Link
             href="/contact"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-            style={{ backgroundColor: "#00C2A8", color: "#0C0C0E" }}
+            style={{
+              fontFamily: "var(--font-inter)",
+              fontSize: "14px",
+              fontWeight: 500,
+              backgroundColor: "#0A0A0A",
+              color: "#FFFFFF",
+              padding: "8px 20px",
+              display: "inline-block",
+            }}
           >
-            Get Started
+            Get in touch
           </Link>
         </div>
 
-        {/* Mobile hamburger */}
         <button
-          className="md:hidden p-2 rounded-lg transition-colors"
-          style={{ color: "#A1A1AA" }}
+          className="md:hidden p-2"
+          style={{ color: "#0A0A0A" }}
           onClick={() => setOpen(!open)}
           aria-label={open ? "Close menu" : "Open menu"}
         >
@@ -72,19 +81,19 @@ export function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile menu */}
       {open && (
         <div
-          className="md:hidden border-t px-6 py-4 flex flex-col gap-4"
-          style={{ backgroundColor: "#0C0C0E", borderColor: "#1C1C1F" }}
+          className="md:hidden border-t px-8 py-6 flex flex-col gap-5"
+          style={{ backgroundColor: "#F5F4F0", borderColor: "#E2E0DA" }}
         >
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm py-1 transition-colors"
               style={{
-                color: pathname === link.href ? "#F5F5F5" : "#A1A1AA",
+                fontFamily: "var(--font-inter)",
+                fontSize: "15px",
+                color: pathname === link.href ? "#0A0A0A" : "#6B6B6B",
               }}
               onClick={() => setOpen(false)}
             >
@@ -93,11 +102,20 @@ export function Navbar() {
           ))}
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center px-4 py-2.5 rounded-lg text-sm font-medium mt-2"
-            style={{ backgroundColor: "#00C2A8", color: "#0C0C0E" }}
+            style={{
+              fontFamily: "var(--font-inter)",
+              fontSize: "14px",
+              fontWeight: 500,
+              backgroundColor: "#0A0A0A",
+              color: "#FFFFFF",
+              padding: "10px 20px",
+              display: "inline-block",
+              marginTop: "4px",
+              width: "fit-content",
+            }}
             onClick={() => setOpen(false)}
           >
-            Get Started
+            Get in touch
           </Link>
         </div>
       )}

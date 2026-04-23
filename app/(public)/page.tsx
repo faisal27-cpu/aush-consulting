@@ -5,7 +5,7 @@ import { HowItWorks } from "@/components/public/HowItWorks"
 import { TestimonialsSection } from "@/components/public/TestimonialsSection"
 import { CtaSection } from "@/components/public/CtaSection"
 import { createClient } from "@/lib/supabase/server"
-import type { Service, Testimonial } from "@/lib/types"
+import type { Testimonial } from "@/lib/types"
 
 export const revalidate = 60
 
@@ -18,24 +18,17 @@ export const metadata = {
 export default async function HomePage() {
   const supabase = await createClient()
 
-  const [{ data: testimonials }, { data: services }] = await Promise.all([
-    supabase
-      .from("testimonials")
-      .select("*")
-      .eq("is_active", true)
-      .order("created_at", { ascending: true }),
-    supabase
-      .from("services")
-      .select("*")
-      .eq("is_active", true)
-      .order("sort_order", { ascending: true }),
-  ])
+  const { data: testimonials } = await supabase
+    .from("testimonials")
+    .select("*")
+    .eq("is_active", true)
+    .order("created_at", { ascending: true })
 
   return (
     <>
       <HeroSection />
       <StatsBar />
-      <ServicesGrid services={(services as Service[]) ?? []} />
+      <ServicesGrid />
       <HowItWorks />
       <TestimonialsSection testimonials={(testimonials as Testimonial[]) ?? []} />
       <CtaSection />

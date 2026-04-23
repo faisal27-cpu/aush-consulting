@@ -1,11 +1,19 @@
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Playfair_Display, Inter } from "next/font/google"
 import "./globals.css"
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+})
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
+  weight: ["300", "400", "500", "600"],
 })
 
 export const metadata: Metadata = {
@@ -30,11 +38,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} dark`}>
-      <body
-        className="antialiased"
-        style={{ backgroundColor: "#0C0C0E", color: "#F5F5F5" }}
-      >
+    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
+      <body className="antialiased" style={{ backgroundColor: "#F5F4F0", color: "#0A0A0A" }}>
         {children}
       </body>
     </html>

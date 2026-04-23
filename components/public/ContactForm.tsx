@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { CheckCircle2, Loader2 } from "lucide-react"
+import { Loader2 } from "lucide-react"
 
 type Status = "idle" | "loading" | "success" | "error"
 
@@ -12,10 +12,29 @@ const services = [
   "Not Sure Yet",
 ]
 
+const inputStyle = {
+  width: "100%",
+  padding: "14px 16px",
+  fontFamily: "var(--font-inter)",
+  fontSize: "14px",
+  color: "#0A0A0A",
+  backgroundColor: "#FFFFFF",
+  border: "1px solid #E2E0DA",
+  outline: "none",
+  display: "block",
+}
+
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle")
   const [submittedName, setSubmittedName] = useState("")
   const [error, setError] = useState("")
+
+  function handleFocus(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
+    e.target.style.borderColor = "#0A0A0A"
+  }
+  function handleBlur(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
+    e.target.style.borderColor = "#E2E0DA"
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -37,11 +56,7 @@ export function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       })
-
-      if (!res.ok) {
-        throw new Error("Submission failed")
-      }
-
+      if (!res.ok) throw new Error("Submission failed")
       setSubmittedName(data.name)
       setStatus("success")
     } catch {
@@ -53,22 +68,38 @@ export function ContactForm() {
   if (status === "success") {
     return (
       <div
-        className="flex flex-col items-center text-center py-20 px-6 rounded-xl border"
-        style={{ backgroundColor: "#111113", borderColor: "#1C1C1F" }}
+        style={{
+          padding: "64px 48px",
+          backgroundColor: "#FFFFFF",
+          border: "1px solid #E2E0DA",
+          textAlign: "center",
+        }}
         role="alert"
       >
-        <CheckCircle2 className="w-12 h-12 mb-4" style={{ color: "#00C2A8" }} />
-        <h3 className="text-xl font-semibold" style={{ color: "#F5F5F5" }}>
+        <h3
+          style={{
+            fontFamily: "var(--font-playfair)",
+            fontSize: "28px",
+            fontWeight: 500,
+            color: "#0A0A0A",
+            marginBottom: "12px",
+          }}
+        >
           Message received.
         </h3>
-        <p className="text-sm mt-2 max-w-sm" style={{ color: "#A1A1AA" }}>
-          Thanks, {submittedName}. We&apos;ve got your message and will be in
-          touch within one business day. In the meantime, feel free to explore
-          our{" "}
-          <a href="/services" style={{ color: "#00C2A8" }}>
-            services page
-          </a>
-          .
+        <p
+          style={{
+            fontFamily: "var(--font-inter)",
+            fontSize: "16px",
+            color: "#6B6B6B",
+            lineHeight: 1.6,
+            fontWeight: 300,
+            maxWidth: "400px",
+            margin: "0 auto",
+          }}
+        >
+          Thanks, {submittedName}. We&apos;ve got your message and will respond
+          within one business day.
         </p>
       </div>
     )
@@ -76,15 +107,22 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      {/* Name + Email */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label
             htmlFor="name"
-            className="block text-sm font-medium mb-1.5"
-            style={{ color: "#F5F5F5" }}
+            style={{
+              display: "block",
+              fontFamily: "var(--font-inter)",
+              fontSize: "12px",
+              color: "#0A0A0A",
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              marginBottom: "8px",
+              fontWeight: 500,
+            }}
           >
-            Name <span style={{ color: "#00C2A8" }}>*</span>
+            Name *
           </label>
           <input
             id="name"
@@ -93,23 +131,26 @@ export function ContactForm() {
             required
             autoComplete="name"
             placeholder="Alex Chen"
-            className="w-full px-4 py-2.5 rounded-lg text-sm outline-none transition-all"
-            style={{
-              backgroundColor: "#111113",
-              border: "1px solid #1C1C1F",
-              color: "#F5F5F5",
-            }}
-            onFocus={(e) => { e.target.style.borderColor = "#00C2A8" }}
-            onBlur={(e) => { e.target.style.borderColor = "#1C1C1F" }}
+            style={inputStyle}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
           />
         </div>
         <div>
           <label
             htmlFor="email"
-            className="block text-sm font-medium mb-1.5"
-            style={{ color: "#F5F5F5" }}
+            style={{
+              display: "block",
+              fontFamily: "var(--font-inter)",
+              fontSize: "12px",
+              color: "#0A0A0A",
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              marginBottom: "8px",
+              fontWeight: 500,
+            }}
           >
-            Work Email <span style={{ color: "#00C2A8" }}>*</span>
+            Work Email *
           </label>
           <input
             id="email"
@@ -118,24 +159,26 @@ export function ContactForm() {
             required
             autoComplete="email"
             placeholder="alex@company.com"
-            className="w-full px-4 py-2.5 rounded-lg text-sm outline-none transition-all"
-            style={{
-              backgroundColor: "#111113",
-              border: "1px solid #1C1C1F",
-              color: "#F5F5F5",
-            }}
-            onFocus={(e) => { e.target.style.borderColor = "#00C2A8" }}
-            onBlur={(e) => { e.target.style.borderColor = "#1C1C1F" }}
+            style={inputStyle}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
           />
         </div>
       </div>
 
-      {/* Company */}
       <div>
         <label
           htmlFor="company"
-          className="block text-sm font-medium mb-1.5"
-          style={{ color: "#F5F5F5" }}
+          style={{
+            display: "block",
+            fontFamily: "var(--font-inter)",
+            fontSize: "12px",
+            color: "#0A0A0A",
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+            marginBottom: "8px",
+            fontWeight: 500,
+          }}
         >
           Company
         </label>
@@ -145,90 +188,113 @@ export function ContactForm() {
           type="text"
           autoComplete="organization"
           placeholder="Acme Corp"
-          className="w-full px-4 py-2.5 rounded-lg text-sm outline-none transition-all"
-          style={{
-            backgroundColor: "#111113",
-            border: "1px solid #1C1C1F",
-            color: "#F5F5F5",
-          }}
-          onFocus={(e) => { e.target.style.borderColor = "#00C2A8" }}
-          onBlur={(e) => { e.target.style.borderColor = "#1C1C1F" }}
+          style={inputStyle}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
         />
       </div>
 
-      {/* Service interest */}
       <div>
         <label
           htmlFor="service_interest"
-          className="block text-sm font-medium mb-1.5"
-          style={{ color: "#F5F5F5" }}
+          style={{
+            display: "block",
+            fontFamily: "var(--font-inter)",
+            fontSize: "12px",
+            color: "#0A0A0A",
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+            marginBottom: "8px",
+            fontWeight: 500,
+          }}
         >
-          Service Interest <span style={{ color: "#00C2A8" }}>*</span>
+          Service Interest *
         </label>
         <select
           id="service_interest"
           name="service_interest"
           required
-          className="w-full px-4 py-2.5 rounded-lg text-sm outline-none transition-all appearance-none"
-          style={{
-            backgroundColor: "#111113",
-            border: "1px solid #1C1C1F",
-            color: "#F5F5F5",
-          }}
-          onFocus={(e) => { e.target.style.borderColor = "#00C2A8" }}
-          onBlur={(e) => { e.target.style.borderColor = "#1C1C1F" }}
+          style={{ ...inputStyle, appearance: "none" as const }}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
         >
-          <option value="" style={{ backgroundColor: "#111113" }}>
-            Select a service...
-          </option>
+          <option value="">Select a service...</option>
           {services.map((s) => (
-            <option key={s} value={s} style={{ backgroundColor: "#111113" }}>
-              {s}
-            </option>
+            <option key={s} value={s}>{s}</option>
           ))}
         </select>
       </div>
 
-      {/* Message */}
       <div>
         <label
           htmlFor="message"
-          className="block text-sm font-medium mb-1.5"
-          style={{ color: "#F5F5F5" }}
+          style={{
+            display: "block",
+            fontFamily: "var(--font-inter)",
+            fontSize: "12px",
+            color: "#0A0A0A",
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+            marginBottom: "8px",
+            fontWeight: 500,
+          }}
         >
-          Message <span style={{ color: "#00C2A8" }}>*</span>
+          Message *
         </label>
         <textarea
           id="message"
           name="message"
           required
-          rows={6}
+          rows={7}
           minLength={10}
           placeholder="Tell us about your project, your data situation, and what success looks like for you."
-          className="w-full px-4 py-2.5 rounded-lg text-sm outline-none transition-all resize-none"
           style={{
-            backgroundColor: "#111113",
-            border: "1px solid #1C1C1F",
-            color: "#F5F5F5",
+            width: "100%",
+            padding: "14px 16px",
+            fontFamily: "var(--font-inter)",
+            fontSize: "14px",
+            color: "#0A0A0A",
+            backgroundColor: "#FFFFFF",
+            border: "1px solid #E2E0DA",
+            outline: "none",
+            display: "block",
+            resize: "none",
           }}
-          onFocus={(e) => { e.target.style.borderColor = "#00C2A8" }}
-          onBlur={(e) => { e.target.style.borderColor = "#1C1C1F" }}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
         />
       </div>
 
-      {/* Error */}
       {status === "error" && (
-        <p className="text-sm" style={{ color: "#EF4444" }} role="alert">
+        <p
+          style={{
+            fontFamily: "var(--font-inter)",
+            fontSize: "14px",
+            color: "#DC2626",
+          }}
+          role="alert"
+        >
           {error}
         </p>
       )}
 
-      {/* Submit */}
       <button
         type="submit"
         disabled={status === "loading"}
-        className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg text-sm font-medium transition-all disabled:opacity-60"
-        style={{ backgroundColor: "#00C2A8", color: "#0C0C0E" }}
+        style={{
+          fontFamily: "var(--font-inter)",
+          fontSize: "14px",
+          fontWeight: 500,
+          backgroundColor: "#0A0A0A",
+          color: "#FFFFFF",
+          padding: "16px 40px",
+          display: "inline-flex",
+          alignItems: "center",
+          gap: "8px",
+          opacity: status === "loading" ? 0.6 : 1,
+          cursor: status === "loading" ? "not-allowed" : "pointer",
+          border: "none",
+        }}
       >
         {status === "loading" ? (
           <>
@@ -236,7 +302,7 @@ export function ContactForm() {
             Sending...
           </>
         ) : (
-          "Send Message"
+          "Send message →"
         )}
       </button>
     </form>

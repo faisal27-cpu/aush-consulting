@@ -8,27 +8,91 @@ interface PricingTiersProps {
 
 const tierOrder = { starter: 0, growth: 1, enterprise: 2 }
 
+const staticServices: Service[] = [
+  {
+    id: "1",
+    name: "AI Strategy",
+    tier: "starter",
+    description: "For companies that need to understand where AI fits before committing to build.",
+    features: [
+      "AI readiness assessment",
+      "Data audit & gap analysis",
+      "12-month AI roadmap",
+      "Executive presentation",
+      "Vendor evaluation support",
+    ],
+    price: "$12,000",
+    is_active: true,
+    sort_order: 0,
+    created_at: "",
+  },
+  {
+    id: "2",
+    name: "AI Development",
+    tier: "growth",
+    description: "For companies ready to move from concept to a production AI system.",
+    features: [
+      "Everything in Strategy",
+      "Custom model development",
+      "API & integration layer",
+      "Monitoring & alerting",
+      "60-day post-launch support",
+    ],
+    price: "$25,000/month",
+    is_active: true,
+    sort_order: 1,
+    created_at: "",
+  },
+  {
+    id: "3",
+    name: "Enterprise",
+    tier: "enterprise",
+    description: "For large organizations with complex data environments and compliance requirements.",
+    features: [
+      "Everything in Development",
+      "Dedicated team",
+      "Compliance & security review",
+      "On-site workshops",
+      "SLA-backed support",
+    ],
+    price: "Custom pricing",
+    is_active: true,
+    sort_order: 2,
+    created_at: "",
+  },
+]
+
 export function PricingTiers({ services }: PricingTiersProps) {
-  const sorted = [...services].sort(
+  const data = services.length > 0 ? services : staticServices
+  const sorted = [...data].sort(
     (a, b) => (tierOrder[a.tier] ?? 0) - (tierOrder[b.tier] ?? 0)
   )
 
   return (
-    <section
-      className="py-24 border-t"
-      style={{ backgroundColor: "#111113", borderColor: "#1C1C1F" }}
-    >
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="mb-12">
+    <section style={{ backgroundColor: "#F5F4F0", padding: "96px 0" }}>
+      <div className="max-w-7xl mx-auto px-8">
+        <div className="mb-16">
           <p
-            className="font-mono text-xs uppercase tracking-widest mb-3"
-            style={{ color: "#00C2A8" }}
+            style={{
+              fontFamily: "var(--font-inter)",
+              fontSize: "11px",
+              letterSpacing: "0.2em",
+              color: "#9B9B9B",
+              textTransform: "uppercase",
+              marginBottom: "16px",
+            }}
           >
             Pricing
           </p>
           <h2
-            className="text-3xl md:text-4xl font-bold tracking-tight"
-            style={{ color: "#F5F5F5" }}
+            style={{
+              fontFamily: "var(--font-playfair)",
+              fontSize: "clamp(36px, 4vw, 48px)",
+              fontWeight: 500,
+              color: "#0A0A0A",
+              lineHeight: 1.15,
+              letterSpacing: "-0.02em",
+            }}
           >
             Straightforward pricing,
             <br />
@@ -36,104 +100,123 @@ export function PricingTiers({ services }: PricingTiersProps) {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 border-l" style={{ borderColor: "#E2E0DA" }}>
           {sorted.map((service) => {
             const isFeatured = service.tier === "growth"
             return (
               <div
                 key={service.id}
-                className="relative rounded-2xl p-8 border flex flex-col"
+                className="border-r border-b flex flex-col"
                 style={{
-                  backgroundColor: "#0C0C0E",
-                  borderColor: isFeatured
-                    ? "rgba(0,194,168,0.4)"
-                    : "#1C1C1F",
-                  boxShadow: isFeatured
-                    ? "0 0 0 1px rgba(0,194,168,0.15)"
-                    : "none",
+                  backgroundColor: isFeatured ? "#0A0A0A" : "#FFFFFF",
+                  borderColor: "#E2E0DA",
+                  padding: "40px",
                 }}
               >
-                {isFeatured && (
-                  <div
-                    className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-medium"
-                    style={{
-                      backgroundColor: "#00C2A8",
-                      color: "#0C0C0E",
-                    }}
-                  >
-                    Most Popular
-                  </div>
-                )}
-
                 <div>
                   <span
-                    className="font-mono text-xs uppercase tracking-widest"
-                    style={{ color: "#00C2A8" }}
+                    style={{
+                      fontFamily: "var(--font-inter)",
+                      fontSize: "11px",
+                      letterSpacing: "0.15em",
+                      textTransform: "uppercase",
+                      color: isFeatured ? "#9B9B9B" : "#9B9B9B",
+                      display: "block",
+                      marginBottom: "12px",
+                    }}
                   >
                     {service.tier}
                   </span>
                   <h3
-                    className="text-2xl font-bold mt-2"
-                    style={{ color: "#F5F5F5" }}
+                    style={{
+                      fontFamily: "var(--font-playfair)",
+                      fontSize: "26px",
+                      fontWeight: 500,
+                      color: isFeatured ? "#FFFFFF" : "#0A0A0A",
+                      letterSpacing: "-0.01em",
+                      marginBottom: "8px",
+                    }}
                   >
                     {service.name}
                   </h3>
 
-                  <div className="mt-4 flex items-baseline gap-1">
+                  <div style={{ marginBottom: "16px" }}>
                     <span
-                      className="text-4xl font-bold"
-                      style={{ color: "#F5F5F5" }}
+                      style={{
+                        fontFamily: "var(--font-playfair)",
+                        fontSize: "36px",
+                        fontWeight: 500,
+                        color: isFeatured ? "#FFFFFF" : "#0A0A0A",
+                      }}
                     >
                       {service.price === "Custom pricing"
                         ? "Custom"
                         : service.price.split("/")[0]}
                     </span>
-                    {service.price !== "Custom pricing" && (
-                      <span className="text-sm" style={{ color: "#71717A" }}>
+                    {service.price !== "Custom pricing" && service.price.includes("/") && (
+                      <span
+                        style={{
+                          fontFamily: "var(--font-inter)",
+                          fontSize: "14px",
+                          color: isFeatured ? "#9B9B9B" : "#9B9B9B",
+                          marginLeft: "4px",
+                        }}
+                      >
                         /month
                       </span>
                     )}
                   </div>
 
                   <p
-                    className="text-sm mt-3 leading-relaxed"
-                    style={{ color: "#A1A1AA" }}
+                    style={{
+                      fontFamily: "var(--font-inter)",
+                      fontSize: "14px",
+                      color: isFeatured ? "#9B9B9B" : "#6B6B6B",
+                      lineHeight: 1.6,
+                      fontWeight: 300,
+                      marginBottom: "32px",
+                    }}
                   >
                     {service.description}
                   </p>
                 </div>
 
-                <ul className="mt-6 space-y-2.5 flex-1">
+                <ul className="space-y-3 flex-1">
                   {service.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-3">
                       <CheckCircle2
                         className="w-4 h-4 mt-0.5 shrink-0"
-                        style={{ color: "#00C2A8" }}
+                        style={{ color: isFeatured ? "#FFFFFF" : "#0A0A0A" }}
                       />
-                      <span className="text-sm" style={{ color: "#A1A1AA" }}>
+                      <span
+                        style={{
+                          fontFamily: "var(--font-inter)",
+                          fontSize: "14px",
+                          color: isFeatured ? "#9B9B9B" : "#6B6B6B",
+                          fontWeight: 300,
+                        }}
+                      >
                         {feature}
                       </span>
                     </li>
                   ))}
                 </ul>
 
-                <div className="mt-8">
+                <div style={{ marginTop: "40px" }}>
                   <Link
                     href="/contact"
-                    className="inline-flex items-center justify-center w-full px-5 py-2.5 rounded-lg text-sm font-medium transition-all"
-                    style={
-                      isFeatured
-                        ? { backgroundColor: "#00C2A8", color: "#0C0C0E" }
-                        : {
-                            backgroundColor: "transparent",
-                            color: "#F5F5F5",
-                            border: "1px solid #2A2A2F",
-                          }
-                    }
+                    style={{
+                      fontFamily: "var(--font-inter)",
+                      fontSize: "14px",
+                      fontWeight: 500,
+                      display: "block",
+                      textAlign: "center",
+                      padding: "14px 24px",
+                      backgroundColor: isFeatured ? "#FFFFFF" : "#0A0A0A",
+                      color: isFeatured ? "#0A0A0A" : "#FFFFFF",
+                    }}
                   >
-                    {service.tier === "enterprise"
-                      ? "Contact Sales"
-                      : "Get Started"}
+                    {service.tier === "enterprise" ? "Contact Sales" : "Get Started"}
                   </Link>
                 </div>
               </div>
@@ -141,17 +224,26 @@ export function PricingTiers({ services }: PricingTiersProps) {
           })}
         </div>
 
-        {/* Bottom note */}
         <div
-          className="mt-12 text-center rounded-xl p-6 border"
-          style={{ backgroundColor: "#0C0C0E", borderColor: "#1C1C1F" }}
+          style={{
+            marginTop: "40px",
+            padding: "24px",
+            backgroundColor: "#FFFFFF",
+            border: "1px solid #E2E0DA",
+            textAlign: "center",
+          }}
         >
-          <p className="text-sm" style={{ color: "#A1A1AA" }}>
+          <p
+            style={{
+              fontFamily: "var(--font-inter)",
+              fontSize: "14px",
+              color: "#6B6B6B",
+            }}
+          >
             Not sure which tier fits?{" "}
             <Link
               href="/contact"
-              className="font-medium transition-colors hover:opacity-80"
-              style={{ color: "#00C2A8" }}
+              style={{ color: "#0A0A0A", fontWeight: 500 }}
             >
               Book a free 30-minute discovery call
             </Link>{" "}

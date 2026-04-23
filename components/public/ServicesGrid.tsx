@@ -1,85 +1,122 @@
 import Link from "next/link"
-import { ArrowRight, BarChart2, Code2, Plug } from "lucide-react"
-import type { Service } from "@/lib/types"
 
-const iconMap: Record<string, React.ElementType> = {
-  starter: BarChart2,
-  growth: Code2,
-  enterprise: Plug,
-}
+const services = [
+  {
+    number: "01",
+    name: "AI Strategy & Roadmap",
+    description:
+      "We assess your data, your constraints, and your market position, then build a concrete AI roadmap tied to business outcomes — not technology trends.",
+  },
+  {
+    number: "02",
+    name: "Custom AI Development",
+    description:
+      "From LLM fine-tuning to computer vision pipelines, we build production-grade AI systems designed to run at scale with real data and real users.",
+  },
+  {
+    number: "03",
+    name: "AI Integration & Ops",
+    description:
+      "We connect AI capabilities to your existing stack, establish monitoring, and ensure your team can own and iterate on the systems we build.",
+  },
+]
 
-interface ServicesGridProps {
-  services: Service[]
-}
-
-export function ServicesGrid({ services }: ServicesGridProps) {
+export function ServicesGrid() {
   return (
-    <section className="py-24" style={{ backgroundColor: "#0C0C0E" }}>
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Section header */}
-        <div className="mb-12">
+    <section style={{ backgroundColor: "#F5F4F0", padding: "96px 0" }}>
+      <div className="max-w-7xl mx-auto px-8">
+        <div className="mb-16">
           <p
-            className="font-mono text-xs uppercase tracking-widest mb-3"
-            style={{ color: "#00C2A8" }}
+            style={{
+              fontFamily: "var(--font-inter)",
+              fontSize: "11px",
+              letterSpacing: "0.2em",
+              color: "#9B9B9B",
+              textTransform: "uppercase",
+              marginBottom: "16px",
+            }}
           >
             What We Do
           </p>
           <h2
-            className="text-3xl md:text-4xl font-bold tracking-tight"
-            style={{ color: "#F5F5F5" }}
+            style={{
+              fontFamily: "var(--font-playfair)",
+              fontSize: "clamp(36px, 4vw, 48px)",
+              fontWeight: 500,
+              color: "#0A0A0A",
+              lineHeight: 1.15,
+              letterSpacing: "-0.02em",
+            }}
           >
-            AI that fits your business,
-            <br />
-            not the other way around
+            Three ways we work
           </h2>
         </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {services.map((service) => {
-            const Icon = iconMap[service.tier] ?? BarChart2
-            return (
-              <div
-                key={service.id}
-                className="group rounded-xl p-6 border transition-all"
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-l" style={{ borderColor: "#E2E0DA" }}>
+          {services.map((service) => (
+            <div
+              key={service.number}
+              className="border-r border-b"
+              style={{
+                backgroundColor: "#FFFFFF",
+                borderColor: "#E2E0DA",
+                padding: "40px",
+              }}
+            >
+              <span
                 style={{
-                  backgroundColor: "#111113",
-                  borderColor: "#1C1C1F",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(0,194,168,0.3)"
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "#1C1C1F"
+                  fontFamily: "var(--font-inter)",
+                  fontSize: "11px",
+                  color: "#9B9B9B",
+                  letterSpacing: "0.05em",
+                  display: "block",
                 }}
               >
-                <Icon
-                  className="w-6 h-6 mb-4"
-                  style={{ color: "#00C2A8" }}
-                />
-                <h3
-                  className="text-lg font-semibold"
-                  style={{ color: "#F5F5F5" }}
-                >
-                  {service.name}
-                </h3>
-                <p
-                  className="text-sm mt-2 leading-relaxed"
-                  style={{ color: "#A1A1AA" }}
-                >
-                  {service.description}
-                </p>
+                {service.number}
+              </span>
+
+              <h3
+                style={{
+                  fontFamily: "var(--font-playfair)",
+                  fontSize: "24px",
+                  fontWeight: 500,
+                  color: "#0A0A0A",
+                  lineHeight: 1.2,
+                  marginTop: "32px",
+                  marginBottom: "16px",
+                  letterSpacing: "-0.01em",
+                }}
+              >
+                {service.name}
+              </h3>
+
+              <p
+                style={{
+                  fontFamily: "var(--font-inter)",
+                  fontSize: "15px",
+                  color: "#6B6B6B",
+                  lineHeight: 1.65,
+                  flexGrow: 1,
+                }}
+              >
+                {service.description}
+              </p>
+
+              <div style={{ borderTop: "1px solid #E2E0DA", marginTop: "32px", paddingTop: "20px" }}>
                 <Link
                   href="/services"
-                  className="inline-flex items-center gap-1 text-sm mt-4 transition-all"
-                  style={{ color: "#00C2A8" }}
+                  style={{
+                    fontFamily: "var(--font-inter)",
+                    fontSize: "13px",
+                    color: "#0A0A0A",
+                    fontWeight: 500,
+                  }}
                 >
-                  Learn more
-                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+                  Learn more →
                 </Link>
               </div>
-            )
-          })}
+            </div>
+          ))}
         </div>
       </div>
     </section>

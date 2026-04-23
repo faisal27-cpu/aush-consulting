@@ -17,8 +17,8 @@ const contactSchema = z.object({
 
 function getAdminClient() {
   return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    process.env.NEXT_PUBLIC_SUPABASE_URL ?? "http://localhost",
+    process.env.SUPABASE_SERVICE_ROLE_KEY ?? "placeholder",
     { auth: { autoRefreshToken: false, persistSession: false } }
   )
 }

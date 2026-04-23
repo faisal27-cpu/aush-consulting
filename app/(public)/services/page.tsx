@@ -35,29 +35,44 @@ export default async function ServicesPage() {
   return (
     <>
       {/* Hero */}
-      <section
-        className="py-24 border-b relative overflow-hidden"
-        style={{ backgroundColor: "#0C0C0E", borderColor: "#1C1C1F" }}
-      >
-        <div className="absolute inset-0 hero-dot-grid opacity-40" />
-        <div className="relative z-10 max-w-6xl mx-auto px-6">
+      <section style={{ backgroundColor: "#F5F4F0", padding: "96px 0 80px" }}>
+        <div className="max-w-7xl mx-auto px-8">
           <p
-            className="font-mono text-xs uppercase tracking-widest mb-4"
-            style={{ color: "#00C2A8" }}
+            style={{
+              fontFamily: "var(--font-inter)",
+              fontSize: "11px",
+              letterSpacing: "0.2em",
+              color: "#9B9B9B",
+              textTransform: "uppercase",
+              marginBottom: "24px",
+            }}
           >
             Services & Pricing
           </p>
           <h1
-            className="text-4xl md:text-5xl font-bold tracking-tight"
-            style={{ color: "#F5F5F5" }}
+            style={{
+              fontFamily: "var(--font-playfair)",
+              fontSize: "clamp(40px, 5vw, 64px)",
+              fontWeight: 500,
+              color: "#0A0A0A",
+              lineHeight: 1.1,
+              letterSpacing: "-0.02em",
+              marginBottom: "24px",
+            }}
           >
             Straightforward services,
             <br />
             transparent pricing
           </h1>
           <p
-            className="text-lg mt-5 max-w-2xl leading-relaxed"
-            style={{ color: "#A1A1AA" }}
+            style={{
+              fontFamily: "var(--font-inter)",
+              fontSize: "18px",
+              color: "#6B6B6B",
+              fontWeight: 300,
+              lineHeight: 1.65,
+              maxWidth: "520px",
+            }}
           >
             Three engagement models to match where you are in your AI journey.
             All include direct access to senior engineers and weekly progress
@@ -66,87 +81,138 @@ export default async function ServicesPage() {
         </div>
       </section>
 
+      <div style={{ borderTop: "1px solid #E2E0DA" }} />
+
       {/* Service detail sections */}
       {serviceList.map((service, i) => (
         <section
           key={service.id}
-          className="py-24 border-t"
-          style={{ backgroundColor: "#0C0C0E", borderColor: "#1C1C1F" }}
+          style={{
+            backgroundColor: i % 2 === 0 ? "#FFFFFF" : "#F5F4F0",
+            padding: "96px 0",
+            borderBottom: "1px solid #E2E0DA",
+          }}
         >
-          <div className="max-w-6xl mx-auto px-6">
+          <div className="max-w-7xl mx-auto px-8">
             <div
-              className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${
+              className={`grid grid-cols-1 lg:grid-cols-2 gap-20 items-start ${
                 i % 2 === 1 ? "lg:grid-flow-dense" : ""
               }`}
             >
-              {/* Text side */}
               <div className={i % 2 === 1 ? "lg:col-start-2" : ""}>
                 <span
-                  className="font-mono text-xs uppercase tracking-widest"
-                  style={{ color: "#00C2A8" }}
+                  style={{
+                    fontFamily: "var(--font-inter)",
+                    fontSize: "11px",
+                    letterSpacing: "0.15em",
+                    color: "#9B9B9B",
+                    textTransform: "uppercase",
+                    display: "block",
+                    marginBottom: "16px",
+                  }}
                 >
                   {service.tier}
                 </span>
                 <h2
-                  className="text-3xl font-bold mt-2 tracking-tight"
-                  style={{ color: "#F5F5F5" }}
+                  style={{
+                    fontFamily: "var(--font-playfair)",
+                    fontSize: "clamp(32px, 3.5vw, 44px)",
+                    fontWeight: 500,
+                    color: "#0A0A0A",
+                    letterSpacing: "-0.02em",
+                    lineHeight: 1.15,
+                    marginBottom: "20px",
+                  }}
                 >
                   {service.name}
                 </h2>
                 <p
-                  className="text-base mt-4 leading-relaxed"
-                  style={{ color: "#A1A1AA" }}
+                  style={{
+                    fontFamily: "var(--font-inter)",
+                    fontSize: "16px",
+                    color: "#6B6B6B",
+                    lineHeight: 1.65,
+                    fontWeight: 300,
+                    marginBottom: "16px",
+                  }}
                 >
                   {service.description}
                 </p>
                 <p
-                  className="text-sm mt-3 italic"
-                  style={{ color: "#71717A" }}
+                  style={{
+                    fontFamily: "var(--font-inter)",
+                    fontSize: "14px",
+                    color: "#9B9B9B",
+                    fontStyle: "italic",
+                    lineHeight: 1.6,
+                    marginBottom: "32px",
+                  }}
                 >
                   Who it&apos;s for: {whoItsFor[service.tier]}
                 </p>
-                <div className="mt-6">
+                <div>
                   <span
-                    className="text-3xl font-bold"
-                    style={{ color: "#F5F5F5" }}
+                    style={{
+                      fontFamily: "var(--font-playfair)",
+                      fontSize: "40px",
+                      fontWeight: 500,
+                      color: "#0A0A0A",
+                    }}
                   >
                     {service.price === "Custom pricing"
                       ? "Custom"
                       : service.price.split("/")[0]}
                   </span>
-                  {service.price !== "Custom pricing" && (
-                    <span className="text-sm ml-1" style={{ color: "#71717A" }}>
+                  {service.price !== "Custom pricing" && service.price.includes("/") && (
+                    <span
+                      style={{
+                        fontFamily: "var(--font-inter)",
+                        fontSize: "15px",
+                        color: "#9B9B9B",
+                        marginLeft: "6px",
+                      }}
+                    >
                       /month
                     </span>
                   )}
                 </div>
               </div>
 
-              {/* Features card */}
               <div className={i % 2 === 1 ? "lg:col-start-1" : ""}>
                 <div
-                  className="rounded-xl p-8 border"
                   style={{
-                    backgroundColor: "#111113",
-                    borderColor: "#1C1C1F",
+                    padding: "40px",
+                    border: "1px solid #E2E0DA",
+                    backgroundColor: i % 2 === 0 ? "#F5F4F0" : "#FFFFFF",
                   }}
                 >
                   <p
-                    className="text-xs font-mono uppercase tracking-widest mb-4"
-                    style={{ color: "#71717A" }}
+                    style={{
+                      fontFamily: "var(--font-inter)",
+                      fontSize: "11px",
+                      letterSpacing: "0.15em",
+                      color: "#9B9B9B",
+                      textTransform: "uppercase",
+                      marginBottom: "24px",
+                    }}
                   >
                     What&apos;s included
                   </p>
-                  <ul className="space-y-3">
+                  <ul className="space-y-4">
                     {service.features.map((feature) => (
                       <li key={feature} className="flex items-start gap-3">
                         <CheckCircle2
                           className="w-4 h-4 mt-0.5 shrink-0"
-                          style={{ color: "#00C2A8" }}
+                          style={{ color: "#0A0A0A" }}
                         />
                         <span
-                          className="text-sm leading-relaxed"
-                          style={{ color: "#A1A1AA" }}
+                          style={{
+                            fontFamily: "var(--font-inter)",
+                            fontSize: "15px",
+                            color: "#6B6B6B",
+                            lineHeight: 1.5,
+                            fontWeight: 300,
+                          }}
                         >
                           {feature}
                         </span>
