@@ -85,6 +85,6 @@
 }
 
 .float-card {
-  animation: float 4s ease-in-out infinite;
+  animation: float 5s ease-in-out infinite;
   will-change: transform;
 }

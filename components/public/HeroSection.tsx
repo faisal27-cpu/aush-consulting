@@ -1,13 +1,7 @@
 import Link from "next/link"
 
 const marqueeText =
-  "Financial Services  ·  Healthcare  ·  SaaS  ·  Manufacturing  ·  Logistics  ·  Retail  ·  Legal  ·  Real Estate  ·  "
-
-const metrics = [
-  { label: "Model Accuracy", value: "94.2%", fill: 94 },
-  { label: "Processing Time", value: "1.2s avg", fill: 80 },
-  { label: "Cost Reduction", value: "67%", fill: 67 },
-]
+  "Financial Services  ·  Healthcare  ·  SaaS  ·  Manufacturing  ·  Logistics  ·  Retail  ·  Legal  ·  Real Estate  ·  "
 
 export function HeroSection() {
   return (
@@ -102,109 +96,174 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Right column — metrics card */}
-          <div className="hidden md:flex items-center justify-center">
+          {/* Right column — stacked testimonial cards */}
+          <div className="hidden md:flex flex-col items-center justify-center gap-6">
+
+            {/* Card stack */}
             <div
               className="float-card"
-              style={{
-                backgroundColor: "#0A0A0A",
-                border: "1px solid #2A2A2A",
-                padding: "32px",
-                width: "100%",
-                maxWidth: "440px",
-              }}
+              style={{ position: "relative", height: "420px", width: "100%" }}
             >
-              {/* Mac window dots */}
-              <div style={{ display: "flex", gap: "6px", marginBottom: "20px" }}>
-                <div style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "#FF5F57" }} />
-                <div style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "#FFBD2E" }} />
-                <div style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "#28C840" }} />
-              </div>
 
-              {/* Card title */}
-              <p
+              {/* Card 1 — bottom, furthest back */}
+              <div
                 style={{
-                  fontFamily: "var(--font-inter)",
-                  fontSize: "11px",
-                  letterSpacing: "0.2em",
-                  color: "#6B6B6B",
-                  textTransform: "uppercase",
-                  marginBottom: "24px",
+                  position: "absolute",
+                  top: "40px",
+                  left: "20px",
+                  right: "20px",
+                  minHeight: "280px",
+                  backgroundColor: "#E8E5DF",
+                  border: "1px solid #D8D5CF",
+                  transform: "rotate(-2deg)",
+                  padding: "28px",
+                  opacity: 0.5,
+                  zIndex: 1,
+                }}
+              />
+
+              {/* Card 2 — middle */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: "20px",
+                  left: "10px",
+                  right: "10px",
+                  minHeight: "280px",
+                  backgroundColor: "#F0EDE6",
+                  border: "1px solid #E2E0DA",
+                  transform: "rotate(-1deg)",
+                  padding: "28px",
+                  zIndex: 2,
+                }}
+              />
+
+              {/* Card 3 — top, front */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: "0",
+                  left: "0",
+                  right: "0",
+                  backgroundColor: "#FFFFFF",
+                  border: "1px solid #E2E0DA",
+                  padding: "28px",
+                  boxShadow: "0 20px 60px rgba(0,0,0,0.08)",
+                  zIndex: 3,
                 }}
               >
-                Live project metrics
-              </p>
-
-              {/* Metric rows */}
-              {metrics.map((metric, i) => (
-                <div
-                  key={metric.label}
-                  style={{
-                    paddingBottom: "16px",
-                    marginBottom: "16px",
-                    borderBottom: i < metrics.length - 1 ? "1px solid #1A1A1A" : "none",
-                  }}
-                >
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
-                    <span
-                      style={{
-                        fontFamily: "var(--font-inter)",
-                        fontSize: "13px",
-                        color: "#9B9B9B",
-                      }}
-                    >
-                      {metric.label}
-                    </span>
-                    <span
+                {/* Avatar + name */}
+                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                  <div
+                    style={{
+                      width: "32px",
+                      height: "32px",
+                      borderRadius: "50%",
+                      backgroundColor: "#0A0A0A",
+                      color: "#FFFFFF",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontFamily: "var(--font-inter)",
+                      fontSize: "11px",
+                      fontWeight: 600,
+                      flexShrink: 0,
+                    }}
+                  >
+                    SC
+                  </div>
+                  <div>
+                    <p
                       style={{
                         fontFamily: "var(--font-inter)",
                         fontSize: "13px",
                         fontWeight: 500,
-                        color: "#FFFFFF",
+                        color: "#0A0A0A",
+                        margin: 0,
                       }}
                     >
-                      {metric.value}
-                    </span>
-                  </div>
-                  <div
-                    style={{
-                      backgroundColor: "#1A1A1A",
-                      height: "2px",
-                      width: "100%",
-                    }}
-                  >
-                    <div
+                      Sarah Chen
+                    </p>
+                    <p
                       style={{
-                        backgroundColor: "#F5F4F0",
-                        height: "100%",
-                        width: `${metric.fill}%`,
+                        fontFamily: "var(--font-inter)",
+                        fontSize: "12px",
+                        color: "#9B9B9B",
+                        margin: 0,
                       }}
-                    />
+                    >
+                      VP of Operations, Meridian Health
+                    </p>
                   </div>
                 </div>
-              ))}
 
-              {/* Separator */}
-              <div style={{ borderTop: "1px solid #1A1A1A", marginBottom: "16px" }} />
+                {/* Divider */}
+                <div style={{ borderTop: "1px solid #F0EDE6", margin: "16px 0" }} />
 
-              {/* Stat pills */}
-              <div style={{ display: "flex", gap: "8px" }}>
-                {["50+ Projects", "98% Retention"].map((label) => (
-                  <div
-                    key={label}
-                    style={{
-                      backgroundColor: "#1A1A1A",
-                      padding: "8px 16px",
-                      fontFamily: "var(--font-inter)",
-                      fontSize: "12px",
-                      color: "#9B9B9B",
-                    }}
-                  >
-                    {label}
-                  </div>
-                ))}
+                {/* Quote */}
+                <p
+                  style={{
+                    fontFamily: "var(--font-playfair)",
+                    fontStyle: "italic",
+                    fontSize: "16px",
+                    color: "#0A0A0A",
+                    lineHeight: 1.65,
+                    marginBottom: "16px",
+                  }}
+                >
+                  &ldquo;AUSH reduced our manual processing time by 73% in the first quarter.&rdquo;
+                </p>
+
+                {/* Stars */}
+                <div
+                  style={{
+                    color: "#D4A853",
+                    fontSize: "14px",
+                    marginBottom: "16px",
+                    letterSpacing: "2px",
+                  }}
+                >
+                  ★★★★★
+                </div>
+
+                {/* Tag */}
+                <p
+                  style={{
+                    fontFamily: "var(--font-inter)",
+                    fontSize: "11px",
+                    color: "#9B9B9B",
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    margin: 0,
+                  }}
+                >
+                  Healthcare · AI Pipeline
+                </p>
               </div>
+
             </div>
+
+            {/* Trust badges */}
+            <div style={{ display: "flex", gap: "8px", width: "100%" }}>
+              {["50+ Enterprise Projects", "98% Client Retention"].map((label) => (
+                <div
+                  key={label}
+                  style={{
+                    backgroundColor: "#F0EDE6",
+                    border: "1px solid #E2E0DA",
+                    padding: "8px 16px",
+                    fontFamily: "var(--font-inter)",
+                    fontSize: "11px",
+                    color: "#6B6B6B",
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {label}
+                </div>
+              ))}
+            </div>
+
           </div>
 
         </div>
