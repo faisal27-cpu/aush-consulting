@@ -23,101 +23,125 @@ const services = [
 
 export function ServicesGrid() {
   return (
-    <section style={{ backgroundColor: "#F5F4F0", padding: "96px 0" }}>
+    <section style={{ backgroundColor: "#F5F4F0", padding: "128px 0" }}>
       <div className="max-w-7xl mx-auto px-8">
-        <div className="mb-16">
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-end mb-20">
+          <div>
+            <p
+              style={{
+                fontFamily: "var(--font-inter)",
+                fontSize: "11px",
+                letterSpacing: "0.2em",
+                color: "#9B9B9B",
+                textTransform: "uppercase",
+                marginBottom: "16px",
+              }}
+            >
+              What We Do
+            </p>
+            <h2
+              style={{
+                fontFamily: "var(--font-playfair)",
+                fontSize: "clamp(32px, 4vw, 48px)",
+                fontWeight: 500,
+                color: "#0A0A0A",
+                lineHeight: 1.15,
+                letterSpacing: "-0.02em",
+              }}
+            >
+              Three ways we work
+              <br />
+              with clients.
+            </h2>
+          </div>
           <p
             style={{
               fontFamily: "var(--font-inter)",
-              fontSize: "11px",
-              letterSpacing: "0.2em",
-              color: "#9B9B9B",
-              textTransform: "uppercase",
-              marginBottom: "16px",
+              fontSize: "16px",
+              color: "#6B6B6B",
+              fontWeight: 300,
+              lineHeight: 1.7,
+              maxWidth: "420px",
             }}
           >
-            What We Do
+            Every engagement is scoped to your actual problem. We don't sell packages — we scope engagements.
           </p>
-          <h2
-            style={{
-              fontFamily: "var(--font-playfair)",
-              fontSize: "clamp(36px, 4vw, 48px)",
-              fontWeight: 500,
-              color: "#0A0A0A",
-              lineHeight: 1.15,
-              letterSpacing: "-0.02em",
-            }}
-          >
-            Three ways we work
-          </h2>
         </div>
 
-        <div className="grid grid-cols-3 gap-0 border-l overflow-visible" style={{ borderColor: "#E2E0DA" }}>
-          {services.map((service) => (
+        <div>
+          {services.map((service, i) => (
             <div
               key={service.number}
-              className="border-r border-b"
               style={{
-                backgroundColor: "#FFFFFF",
-                borderColor: "#E2E0DA",
-                padding: "40px",
+                display: "grid",
+                gridTemplateColumns: "72px 1fr auto",
+                gap: "40px",
+                padding: "48px 0",
+                borderTop: "1px solid #E2E0DA",
+                alignItems: "start",
               }}
             >
               <span
                 style={{
                   fontFamily: "var(--font-inter)",
-                  fontSize: "11px",
-                  color: "#9B9B9B",
+                  fontSize: "13px",
+                  color: "#C8C6BF",
+                  fontWeight: 500,
                   letterSpacing: "0.05em",
-                  display: "block",
+                  paddingTop: "5px",
                 }}
               >
                 {service.number}
               </span>
 
-              <h3
-                style={{
-                  fontFamily: "var(--font-playfair)",
-                  fontSize: "24px",
-                  fontWeight: 500,
-                  color: "#0A0A0A",
-                  lineHeight: 1.2,
-                  marginTop: "32px",
-                  marginBottom: "16px",
-                  letterSpacing: "-0.01em",
-                }}
-              >
-                {service.name}
-              </h3>
-
-              <p
-                style={{
-                  fontFamily: "var(--font-inter)",
-                  fontSize: "15px",
-                  color: "#6B6B6B",
-                  lineHeight: 1.65,
-                  flexGrow: 1,
-                }}
-              >
-                {service.description}
-              </p>
-
-              <div style={{ borderTop: "1px solid #E2E0DA", marginTop: "32px", paddingTop: "20px" }}>
-                <Link
-                  href="/services"
+              <div>
+                <h3
                   style={{
-                    fontFamily: "var(--font-inter)",
-                    fontSize: "13px",
-                    color: "#0A0A0A",
+                    fontFamily: "var(--font-playfair)",
+                    fontSize: "clamp(20px, 2vw, 24px)",
                     fontWeight: 500,
+                    color: "#0A0A0A",
+                    letterSpacing: "-0.01em",
+                    marginBottom: "12px",
                   }}
                 >
-                  Learn more →
-                </Link>
+                  {service.name}
+                </h3>
+                <p
+                  style={{
+                    fontFamily: "var(--font-inter)",
+                    fontSize: "15px",
+                    color: "#6B6B6B",
+                    lineHeight: 1.7,
+                    fontWeight: 300,
+                    maxWidth: "560px",
+                  }}
+                >
+                  {service.description}
+                </p>
               </div>
+
+              <Link
+                href="/services"
+                style={{
+                  fontFamily: "var(--font-inter)",
+                  fontSize: "13px",
+                  color: "#0A0A0A",
+                  fontWeight: 500,
+                  whiteSpace: "nowrap",
+                  paddingTop: "5px",
+                }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.opacity = "0.6" }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.opacity = "1" }}
+              >
+                Learn more →
+              </Link>
             </div>
           ))}
+          <div style={{ borderBottom: "1px solid #E2E0DA" }} />
         </div>
+
       </div>
     </section>
   )

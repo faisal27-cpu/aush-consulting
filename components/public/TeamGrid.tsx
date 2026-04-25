@@ -25,104 +25,127 @@ const team = [
 
 export function TeamGrid() {
   return (
-    <section style={{ backgroundColor: "#F5F4F0", padding: "96px 0" }}>
+    <section style={{ backgroundColor: "#F5F4F0", padding: "128px 0" }}>
       <div className="max-w-7xl mx-auto px-8">
-        <div className="mb-16">
-          <p
-            style={{
-              fontFamily: "var(--font-inter)",
-              fontSize: "11px",
-              letterSpacing: "0.2em",
-              color: "#9B9B9B",
-              textTransform: "uppercase",
-              marginBottom: "16px",
-            }}
-          >
-            The Team
-          </p>
-          <h2
-            style={{
-              fontFamily: "var(--font-playfair)",
-              fontSize: "clamp(36px, 4vw, 48px)",
-              fontWeight: 500,
-              color: "#0A0A0A",
-              lineHeight: 1.15,
-              letterSpacing: "-0.02em",
-            }}
-          >
-            Small by design.
-            <br />
-            Senior by requirement.
-          </h2>
-        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 border-l" style={{ borderColor: "#E2E0DA" }}>
-          {team.map((member) => (
-            <div
-              key={member.name}
-              className="border-r border-b"
+          {/* Left — sticky */}
+          <div className="lg:sticky lg:top-24 self-start">
+            <p
               style={{
-                backgroundColor: "#FFFFFF",
-                borderColor: "#E2E0DA",
-                padding: "36px",
+                fontFamily: "var(--font-inter)",
+                fontSize: "11px",
+                letterSpacing: "0.2em",
+                color: "#9B9B9B",
+                textTransform: "uppercase",
+                marginBottom: "20px",
               }}
             >
-              <div
-                style={{
-                  width: "48px",
-                  height: "48px",
-                  backgroundColor: "#0A0A0A",
-                  color: "#FFFFFF",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontFamily: "var(--font-inter)",
-                  fontSize: "13px",
-                  fontWeight: 500,
-                  letterSpacing: "0.05em",
-                  marginBottom: "20px",
-                }}
-              >
-                {getInitials(member.name)}
-              </div>
+              The Team
+            </p>
+            <h2
+              style={{
+                fontFamily: "var(--font-playfair)",
+                fontSize: "clamp(32px, 4vw, 48px)",
+                fontWeight: 500,
+                color: "#0A0A0A",
+                lineHeight: 1.15,
+                letterSpacing: "-0.02em",
+                marginBottom: "24px",
+              }}
+            >
+              Small by design.
+              <br />
+              Senior by requirement.
+            </h2>
+            <p
+              style={{
+                fontFamily: "var(--font-inter)",
+                fontSize: "16px",
+                color: "#6B6B6B",
+                fontWeight: 300,
+                lineHeight: 1.7,
+                maxWidth: "360px",
+              }}
+            >
+              Every client works directly with a senior engineer and a strategist. No project managers in between, no handoffs to junior staff.
+            </p>
+          </div>
 
-              <h3
+          {/* Right — horizontal team member rows */}
+          <div>
+            {team.map((member, i) => (
+              <div
+                key={member.name}
                 style={{
-                  fontFamily: "var(--font-playfair)",
-                  fontSize: "18px",
-                  fontWeight: 500,
-                  color: "#0A0A0A",
-                  letterSpacing: "-0.01em",
-                  marginBottom: "4px",
+                  display: "flex",
+                  gap: "24px",
+                  paddingTop: i === 0 ? 0 : "44px",
+                  paddingBottom: "44px",
+                  borderBottom: "1px solid #E2E0DA",
+                  alignItems: "flex-start",
                 }}
               >
-                {member.name}
-              </h3>
-              <p
-                style={{
-                  fontFamily: "var(--font-inter)",
-                  fontSize: "12px",
-                  color: "#9B9B9B",
-                  letterSpacing: "0.05em",
-                  textTransform: "uppercase",
-                  marginBottom: "16px",
-                }}
-              >
-                {member.role}
-              </p>
-              <p
-                style={{
-                  fontFamily: "var(--font-inter)",
-                  fontSize: "14px",
-                  color: "#6B6B6B",
-                  lineHeight: 1.65,
-                  fontWeight: 300,
-                }}
-              >
-                {member.bio}
-              </p>
-            </div>
-          ))}
+                <div
+                  style={{
+                    width: "52px",
+                    height: "52px",
+                    borderRadius: "50%",
+                    backgroundColor: "#0A0A0A",
+                    color: "#FFFFFF",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontFamily: "var(--font-inter)",
+                    fontSize: "13px",
+                    fontWeight: 500,
+                    letterSpacing: "0.05em",
+                    flexShrink: 0,
+                  }}
+                >
+                  {getInitials(member.name)}
+                </div>
+                <div>
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-playfair)",
+                      fontSize: "18px",
+                      fontWeight: 500,
+                      color: "#0A0A0A",
+                      letterSpacing: "-0.01em",
+                      marginBottom: "4px",
+                    }}
+                  >
+                    {member.name}
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-inter)",
+                      fontSize: "11px",
+                      color: "#9B9B9B",
+                      letterSpacing: "0.1em",
+                      textTransform: "uppercase",
+                      marginBottom: "14px",
+                    }}
+                  >
+                    {member.role}
+                  </p>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-inter)",
+                      fontSize: "14px",
+                      color: "#6B6B6B",
+                      lineHeight: 1.7,
+                      fontWeight: 300,
+                    }}
+                  >
+                    {member.bio}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
         </div>
       </div>
     </section>

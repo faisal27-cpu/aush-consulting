@@ -18,77 +18,102 @@ const values = [
 
 export function ValuesSection() {
   return (
-    <section style={{ backgroundColor: "#FFFFFF", padding: "96px 0" }}>
+    <section style={{ backgroundColor: "#FFFFFF", padding: "128px 0" }}>
       <div className="max-w-7xl mx-auto px-8">
-        <div className="mb-16">
-          <p
-            style={{
-              fontFamily: "var(--font-inter)",
-              fontSize: "11px",
-              letterSpacing: "0.2em",
-              color: "#9B9B9B",
-              textTransform: "uppercase",
-              marginBottom: "16px",
-            }}
-          >
-            How We Work
-          </p>
-          <h2
-            style={{
-              fontFamily: "var(--font-playfair)",
-              fontSize: "clamp(36px, 4vw, 48px)",
-              fontWeight: 500,
-              color: "#0A0A0A",
-              lineHeight: 1.15,
-              letterSpacing: "-0.02em",
-            }}
-          >
-            Three things we
-            <br />
-            won&apos;t compromise on
-          </h2>
-        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-l" style={{ borderColor: "#E2E0DA" }}>
-          {values.map((value) => (
-            <div
-              key={value.title}
-              className="border-r border-b"
-              style={{ padding: "40px", borderColor: "#E2E0DA" }}
+          {/* Left — sticky */}
+          <div className="lg:sticky lg:top-24 self-start">
+            <p
+              style={{
+                fontFamily: "var(--font-inter)",
+                fontSize: "11px",
+                letterSpacing: "0.2em",
+                color: "#9B9B9B",
+                textTransform: "uppercase",
+                marginBottom: "20px",
+              }}
             >
+              Principles
+            </p>
+            <h2
+              style={{
+                fontFamily: "var(--font-playfair)",
+                fontSize: "clamp(32px, 4vw, 48px)",
+                fontWeight: 500,
+                color: "#0A0A0A",
+                lineHeight: 1.15,
+                letterSpacing: "-0.02em",
+                marginBottom: "24px",
+              }}
+            >
+              Three things we
+              <br />
+              won&apos;t compromise on.
+            </h2>
+            <p
+              style={{
+                fontFamily: "var(--font-inter)",
+                fontSize: "16px",
+                color: "#6B6B6B",
+                fontWeight: 300,
+                lineHeight: 1.7,
+                maxWidth: "360px",
+              }}
+            >
+              Principles aren&apos;t worth much unless they cost something. Here&apos;s what ours have cost us.
+            </p>
+          </div>
+
+          {/* Right — editorial rows */}
+          <div>
+            {values.map((value, i) => (
               <div
+                key={value.title}
                 style={{
-                  width: "100%",
-                  height: "1px",
-                  backgroundColor: "#0A0A0A",
-                  marginBottom: "32px",
-                }}
-              />
-              <h3
-                style={{
-                  fontFamily: "var(--font-playfair)",
-                  fontSize: "22px",
-                  fontWeight: 500,
-                  color: "#0A0A0A",
-                  letterSpacing: "-0.01em",
-                  marginBottom: "16px",
+                  paddingTop: i === 0 ? 0 : "52px",
+                  paddingBottom: "52px",
+                  borderBottom: "1px solid #E2E0DA",
                 }}
               >
-                {value.title}
-              </h3>
-              <p
-                style={{
-                  fontFamily: "var(--font-inter)",
-                  fontSize: "15px",
-                  color: "#6B6B6B",
-                  lineHeight: 1.65,
-                  fontWeight: 300,
-                }}
-              >
-                {value.description}
-              </p>
-            </div>
-          ))}
+                <p
+                  style={{
+                    fontFamily: "var(--font-inter)",
+                    fontSize: "11px",
+                    color: "#C8C6BF",
+                    letterSpacing: "0.1em",
+                    marginBottom: "16px",
+                  }}
+                >
+                  0{i + 1}
+                </p>
+                <h3
+                  style={{
+                    fontFamily: "var(--font-playfair)",
+                    fontSize: "clamp(20px, 2vw, 24px)",
+                    fontWeight: 500,
+                    color: "#0A0A0A",
+                    letterSpacing: "-0.01em",
+                    marginBottom: "16px",
+                  }}
+                >
+                  {value.title}
+                </h3>
+                <p
+                  style={{
+                    fontFamily: "var(--font-inter)",
+                    fontSize: "15px",
+                    color: "#6B6B6B",
+                    lineHeight: 1.7,
+                    fontWeight: 300,
+                  }}
+                >
+                  {value.description}
+                </p>
+              </div>
+            ))}
+          </div>
+
         </div>
       </div>
     </section>

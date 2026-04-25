@@ -24,6 +24,8 @@ export function HowItWorks() {
     <section style={{ backgroundColor: "#FFFFFF", padding: "128px 0" }}>
       <div className="max-w-7xl mx-auto px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+
+          {/* Left — sticky */}
           <div className="lg:sticky lg:top-24 self-start">
             <p
               style={{
@@ -40,14 +42,17 @@ export function HowItWorks() {
             <h2
               style={{
                 fontFamily: "var(--font-playfair)",
-                fontSize: "clamp(36px, 4vw, 48px)",
+                fontSize: "clamp(32px, 4vw, 48px)",
                 fontWeight: 500,
                 color: "#0A0A0A",
                 lineHeight: 1.15,
                 letterSpacing: "-0.02em",
+                marginBottom: "24px",
               }}
             >
-              A process built for results, not PowerPoints.
+              A process built for
+              <br />
+              results, not PowerPoints.
             </h2>
             <p
               style={{
@@ -55,65 +60,70 @@ export function HowItWorks() {
                 fontSize: "16px",
                 color: "#6B6B6B",
                 fontWeight: 300,
-                lineHeight: 1.65,
-                marginTop: "20px",
-                maxWidth: "400px",
+                lineHeight: 1.7,
+                maxWidth: "380px",
               }}
             >
-              Most AI projects fail in the handoff between strategy and engineering.
-              We close that gap by keeping the same team on the project from kickoff
-              to launch.
+              Most AI projects fail in the handoff between strategy and engineering. We close that gap by keeping the same team on the project from kickoff to launch.
             </p>
           </div>
 
-          <div className="space-y-16">
+          {/* Right — numbered steps */}
+          <div>
             {steps.map((step, i) => (
               <div
                 key={step.number}
-                style={
-                  i > 0
-                    ? { borderTop: "1px solid #E2E0DA", paddingTop: "48px" }
-                    : undefined
-                }
+                style={{
+                  paddingTop: i === 0 ? 0 : "52px",
+                  paddingBottom: "52px",
+                  borderBottom: "1px solid #E2E0DA",
+                  display: "flex",
+                  gap: "32px",
+                  alignItems: "flex-start",
+                }}
               >
                 <span
                   style={{
-                    fontFamily: "var(--font-inter)",
-                    fontSize: "11px",
-                    color: "#9B9B9B",
-                    letterSpacing: "0.1em",
-                    display: "block",
-                    marginBottom: "16px",
+                    fontFamily: "var(--font-playfair)",
+                    fontSize: "48px",
+                    fontWeight: 400,
+                    color: "#E8E6E0",
+                    lineHeight: 1,
+                    flexShrink: 0,
+                    marginTop: "-4px",
                   }}
                 >
                   {step.number}
                 </span>
-                <h3
-                  style={{
-                    fontFamily: "var(--font-playfair)",
-                    fontSize: "26px",
-                    fontWeight: 500,
-                    color: "#0A0A0A",
-                    letterSpacing: "-0.01em",
-                    marginBottom: "12px",
-                  }}
-                >
-                  {step.title}
-                </h3>
-                <p
-                  style={{
-                    fontFamily: "var(--font-inter)",
-                    fontSize: "15px",
-                    color: "#6B6B6B",
-                    lineHeight: 1.65,
-                    fontWeight: 300,
-                  }}
-                >
-                  {step.description}
-                </p>
+                <div>
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-playfair)",
+                      fontSize: "clamp(20px, 2vw, 24px)",
+                      fontWeight: 500,
+                      color: "#0A0A0A",
+                      letterSpacing: "-0.01em",
+                      marginBottom: "14px",
+                    }}
+                  >
+                    {step.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-inter)",
+                      fontSize: "15px",
+                      color: "#6B6B6B",
+                      lineHeight: 1.7,
+                      fontWeight: 300,
+                    }}
+                  >
+                    {step.description}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
+
         </div>
       </div>
     </section>

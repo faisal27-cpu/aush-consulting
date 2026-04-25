@@ -1,4 +1,5 @@
 import type { Testimonial } from "@/lib/types"
+import { getInitials } from "@/lib/utils"
 
 const staticTestimonials: Testimonial[] = [
   {
@@ -43,101 +44,166 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
   const cards = data.slice(1, 4)
 
   return (
-    <section style={{ backgroundColor: "#F5F4F0", padding: "96px 0" }}>
+    <section style={{ backgroundColor: "#F5F4F0", padding: "128px 0" }}>
       <div className="max-w-7xl mx-auto px-8">
-        <p
-          style={{
-            fontFamily: "var(--font-inter)",
-            fontSize: "11px",
-            letterSpacing: "0.2em",
-            color: "#9B9B9B",
-            textTransform: "uppercase",
-            marginBottom: "48px",
-          }}
-        >
-          What Clients Say
-        </p>
 
-        {featured && (
-          <div className="mb-20 max-w-4xl">
-            <p
-              style={{
-                fontFamily: "var(--font-playfair)",
-                fontSize: "clamp(80px, 10vw, 120px)",
-                color: "#E2E0DA",
-                lineHeight: 0.8,
-                marginBottom: "16px",
-                fontWeight: 400,
-              }}
-            >
-              &ldquo;
-            </p>
-            <p
-              style={{
-                fontFamily: "var(--font-playfair)",
-                fontSize: "clamp(20px, 2.5vw, 28px)",
-                fontStyle: "italic",
-                color: "#0A0A0A",
-                lineHeight: 1.5,
-                fontWeight: 400,
-                letterSpacing: "-0.01em",
-                maxWidth: "800px",
-              }}
-            >
-              {featured.content}
-            </p>
+        {/* Section header */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-end mb-24">
+          <div>
             <p
               style={{
                 fontFamily: "var(--font-inter)",
-                fontSize: "14px",
-                color: "#6B6B6B",
-                marginTop: "24px",
+                fontSize: "11px",
+                letterSpacing: "0.2em",
+                color: "#9B9B9B",
+                textTransform: "uppercase",
+                marginBottom: "16px",
               }}
             >
-              {featured.author_name} — {featured.author_role}, {featured.author_company}
+              Client Results
             </p>
+            <h2
+              style={{
+                fontFamily: "var(--font-playfair)",
+                fontSize: "clamp(32px, 4vw, 48px)",
+                fontWeight: 500,
+                color: "#0A0A0A",
+                lineHeight: 1.15,
+                letterSpacing: "-0.02em",
+              }}
+            >
+              What happens when
+              <br />
+              AI actually works.
+            </h2>
           </div>
+          <p
+            style={{
+              fontFamily: "var(--font-inter)",
+              fontSize: "16px",
+              color: "#6B6B6B",
+              fontWeight: 300,
+              lineHeight: 1.7,
+              maxWidth: "400px",
+            }}
+          >
+            We let our clients do the talking. These are real outcomes from production deployments — not estimates.
+          </p>
+        </div>
+
+        {/* Featured testimonial */}
+        {featured && (
+          <blockquote
+            style={{
+              borderTop: "2px solid #0A0A0A",
+              paddingTop: "56px",
+              marginBottom: "80px",
+            }}
+          >
+            <p
+              style={{
+                fontFamily: "var(--font-playfair)",
+                fontSize: "clamp(20px, 2.5vw, 30px)",
+                fontStyle: "italic",
+                color: "#0A0A0A",
+                lineHeight: 1.55,
+                fontWeight: 400,
+                letterSpacing: "-0.01em",
+                maxWidth: "800px",
+                marginBottom: "40px",
+              }}
+            >
+              &ldquo;{featured.content}&rdquo;
+            </p>
+            <footer style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+              <div
+                style={{
+                  width: "44px",
+                  height: "44px",
+                  borderRadius: "50%",
+                  backgroundColor: "#0A0A0A",
+                  color: "#FFFFFF",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontFamily: "var(--font-inter)",
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  flexShrink: 0,
+                }}
+              >
+                {getInitials(featured.author_name)}
+              </div>
+              <div>
+                <p
+                  style={{
+                    fontFamily: "var(--font-inter)",
+                    fontSize: "14px",
+                    fontWeight: 500,
+                    color: "#0A0A0A",
+                  }}
+                >
+                  {featured.author_name}
+                </p>
+                <p
+                  style={{
+                    fontFamily: "var(--font-inter)",
+                    fontSize: "13px",
+                    color: "#9B9B9B",
+                    marginTop: "2px",
+                  }}
+                >
+                  {featured.author_role}, {featured.author_company}
+                </p>
+              </div>
+            </footer>
+          </blockquote>
         )}
 
+        {/* Supporting cards */}
         {cards.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-l" style={{ borderColor: "#E2E0DA" }}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {cards.map((t) => (
               <div
                 key={t.id}
-                className="border-r border-b"
                 style={{
                   backgroundColor: "#FFFFFF",
-                  borderColor: "#E2E0DA",
+                  border: "1px solid #E2E0DA",
                   padding: "40px",
                 }}
               >
                 <p
                   style={{
-                    fontFamily: "var(--font-playfair)",
-                    fontSize: "40px",
-                    color: "#E2E0DA",
-                    lineHeight: 0.8,
-                    marginBottom: "16px",
-                  }}
-                >
-                  &ldquo;
-                </p>
-                <p
-                  style={{
                     fontFamily: "var(--font-inter)",
                     fontSize: "15px",
                     color: "#6B6B6B",
-                    lineHeight: 1.65,
+                    lineHeight: 1.7,
                     fontWeight: 300,
+                    marginBottom: "32px",
+                    flexGrow: 1,
                   }}
                 >
-                  {t.content}
+                  &ldquo;{t.content}&rdquo;
                 </p>
-                <div style={{ borderTop: "1px solid #E2E0DA", marginTop: "24px", paddingTop: "20px" }}>
-                  <p style={{ fontFamily: "var(--font-inter)", fontSize: "13px", color: "#0A0A0A", fontWeight: 500 }}>
+                <div style={{ borderTop: "1px solid #F0EDE6", paddingTop: "20px" }}>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-inter)",
+                      fontSize: "13px",
+                      fontWeight: 500,
+                      color: "#0A0A0A",
+                    }}
+                  >
                     {t.author_name}
                   </p>
-                  <p style={{ fontFamily: "var(--font-inter)", fontSize: "12px", color: "#9B9B9B", marginTop: "2px" }}>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-inter)",
+                      fontSize: "12px",
+                      color: "#9B9B9B",
+                      marginTop: "2px",
+                    }}
+                  >
                     {t.author_role}, {t.author_company}
                   </p>
                 </div>
@@ -145,6 +211,7 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
             ))}
           </div>
         )}
+
       </div>
     </section>
   )
