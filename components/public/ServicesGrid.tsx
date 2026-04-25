@@ -52,7 +52,7 @@ export function ServicesGrid() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-l" style={{ borderColor: "#E2E0DA" }}>
+        <div className="grid grid-cols-3 gap-0 border-l overflow-visible" style={{ borderColor: "#E2E0DA" }}>
           {services.map((service) => (
             <div
               key={service.number}
