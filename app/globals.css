@@ -77,3 +77,14 @@
   animation: marquee 45s linear infinite;
   will-change: transform;
 }
+
+/* Hero card float animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.float-card {
+  animation: float 4s ease-in-out infinite;
+  will-change: transform;
+}

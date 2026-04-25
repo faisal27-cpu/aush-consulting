@@ -4,9 +4,9 @@ const marqueeText =
   "Financial Services  ·  Healthcare  ·  SaaS  ·  Manufacturing  ·  Logistics  ·  Retail  ·  Legal  ·  Real Estate  ·  "
 
 const metrics = [
-  { label: "Model accuracy", value: "94.2%", fill: 94 },
-  { label: "Processing time", value: "1.2s", fill: 28 },
-  { label: "Cost reduction", value: "67%", fill: 67 },
+  { label: "Model Accuracy", value: "94.2%", fill: 94 },
+  { label: "Processing Time", value: "1.2s avg", fill: 80 },
+  { label: "Cost Reduction", value: "67%", fill: 67 },
 ]
 
 export function HeroSection() {
@@ -15,8 +15,8 @@ export function HeroSection() {
       className="flex flex-col"
       style={{ backgroundColor: "#F5F4F0", minHeight: "100vh" }}
     >
-      <div className="flex-1 max-w-7xl mx-auto px-8 w-full flex flex-col justify-center py-32">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="flex-1 max-w-7xl mx-auto px-8 w-full flex items-center py-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 w-full items-center">
 
           {/* Left column */}
           <div>
@@ -36,8 +36,8 @@ export function HeroSection() {
             <h1
               style={{
                 fontFamily: "var(--font-playfair)",
-                fontSize: "clamp(48px, 7.5vw, 88px)",
-                fontWeight: 500,
+                fontSize: "clamp(48px, 7.5vw, 72px)",
+                fontWeight: 700,
                 color: "#0A0A0A",
                 lineHeight: 1.1,
                 letterSpacing: "-0.02em",
@@ -102,34 +102,55 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Right column — dashboard mockup */}
-          <div className="hidden lg:flex items-center justify-center">
+          {/* Right column — metrics card */}
+          <div className="hidden md:flex items-center justify-center">
             <div
+              className="float-card"
               style={{
                 backgroundColor: "#0A0A0A",
                 border: "1px solid #2A2A2A",
-                borderRadius: "4px",
-                padding: "24px",
+                padding: "32px",
                 width: "100%",
-                maxWidth: "420px",
+                maxWidth: "440px",
               }}
             >
               {/* Mac window dots */}
-              <div style={{ display: "flex", gap: "6px", marginBottom: "28px" }}>
-                <div style={{ width: "10px", height: "10px", borderRadius: "50%", backgroundColor: "#FF5F57" }} />
-                <div style={{ width: "10px", height: "10px", borderRadius: "50%", backgroundColor: "#FFBD2E" }} />
-                <div style={{ width: "10px", height: "10px", borderRadius: "50%", backgroundColor: "#28CA41" }} />
+              <div style={{ display: "flex", gap: "6px", marginBottom: "20px" }}>
+                <div style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "#FF5F57" }} />
+                <div style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "#FFBD2E" }} />
+                <div style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "#28C840" }} />
               </div>
+
+              {/* Card title */}
+              <p
+                style={{
+                  fontFamily: "var(--font-inter)",
+                  fontSize: "11px",
+                  letterSpacing: "0.2em",
+                  color: "#6B6B6B",
+                  textTransform: "uppercase",
+                  marginBottom: "24px",
+                }}
+              >
+                Live project metrics
+              </p>
 
               {/* Metric rows */}
               {metrics.map((metric, i) => (
-                <div key={metric.label} style={{ marginBottom: i < metrics.length - 1 ? "20px" : "0" }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px" }}>
+                <div
+                  key={metric.label}
+                  style={{
+                    paddingBottom: "16px",
+                    marginBottom: "16px",
+                    borderBottom: i < metrics.length - 1 ? "1px solid #1A1A1A" : "none",
+                  }}
+                >
+                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
                     <span
                       style={{
                         fontFamily: "var(--font-inter)",
-                        fontSize: "12px",
-                        color: "#6B6B6B",
+                        fontSize: "13px",
+                        color: "#9B9B9B",
                       }}
                     >
                       {metric.label}
@@ -137,9 +158,9 @@ export function HeroSection() {
                     <span
                       style={{
                         fontFamily: "var(--font-inter)",
-                        fontSize: "12px",
-                        color: "#E2E0DA",
+                        fontSize: "13px",
                         fontWeight: 500,
+                        color: "#FFFFFF",
                       }}
                     >
                       {metric.value}
@@ -147,23 +168,42 @@ export function HeroSection() {
                   </div>
                   <div
                     style={{
-                      backgroundColor: "#E2E0DA",
-                      height: "3px",
+                      backgroundColor: "#1A1A1A",
+                      height: "2px",
                       width: "100%",
-                      borderRadius: "2px",
                     }}
                   >
                     <div
                       style={{
-                        backgroundColor: "#0A0A0A",
+                        backgroundColor: "#F5F4F0",
                         height: "100%",
                         width: `${metric.fill}%`,
-                        borderRadius: "2px",
                       }}
                     />
                   </div>
                 </div>
               ))}
+
+              {/* Separator */}
+              <div style={{ borderTop: "1px solid #1A1A1A", marginBottom: "16px" }} />
+
+              {/* Stat pills */}
+              <div style={{ display: "flex", gap: "8px" }}>
+                {["50+ Projects", "98% Retention"].map((label) => (
+                  <div
+                    key={label}
+                    style={{
+                      backgroundColor: "#1A1A1A",
+                      padding: "8px 16px",
+                      fontFamily: "var(--font-inter)",
+                      fontSize: "12px",
+                      color: "#9B9B9B",
+                    }}
+                  >
+                    {label}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
