@@ -1,9 +1,58 @@
+'use client'
+
 import Link from "next/link"
+import { useState, useEffect } from "react"
 
 const marqueeText =
   "Financial Services  ·  Healthcare  ·  SaaS  ·  Manufacturing  ·  Logistics  ·  Retail  ·  Legal  ·  Real Estate  ·  "
 
+const testimonials = [
+  {
+    initials: "SC",
+    name: "Sarah Chen",
+    role: "VP of Operations, Meridian Health",
+    quote: "AUSH reduced our manual processing time by 73% in the first quarter.",
+    tag: "Healthcare · AI Pipeline",
+  },
+  {
+    initials: "MR",
+    name: "Marcus Riley",
+    role: "CTO, Stackline",
+    quote: "We evaluated three other AI firms. AUSH was the only one that shipped production-ready code.",
+    tag: "SaaS · Custom Development",
+  },
+  {
+    initials: "PN",
+    name: "Priya Nair",
+    role: "Head of Data, Apex Logistics",
+    quote: "Our AI routing system went live in 6 weeks and cut fuel costs by 18% immediately.",
+    tag: "Logistics · ML Pipeline",
+  },
+]
+
 export function HeroSection() {
+  const [index, setIndex] = useState(0)
+  const [visible, setVisible] = useState(true)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setVisible(false)
+    }, 3500)
+    return () => clearInterval(interval)
+  }, [])
+
+  useEffect(() => {
+    if (!visible) {
+      const timeout = setTimeout(() => {
+        setIndex((i) => (i + 1) % testimonials.length)
+        setVisible(true)
+      }, 400)
+      return () => clearTimeout(timeout)
+    }
+  }, [visible])
+
+  const t = testimonials[index]
+
   return (
     <section
       className="flex flex-col"
@@ -96,60 +145,19 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Right column — stacked testimonial cards */}
-          <div className="hidden md:flex flex-col items-center justify-center gap-6">
+          {/* Right column — rotating testimonial */}
+          <div className="hidden md:flex flex-col gap-6">
 
-            {/* Card stack */}
-            <div
-              className="float-card"
-              style={{ position: "relative", height: "420px", width: "100%" }}
-            >
-
-              {/* Card 1 — bottom, furthest back */}
+            {/* Card */}
+            <div className="float-card">
               <div
                 style={{
-                  position: "absolute",
-                  top: "40px",
-                  left: "20px",
-                  right: "20px",
-                  minHeight: "280px",
-                  backgroundColor: "#E8E5DF",
-                  border: "1px solid #D8D5CF",
-                  transform: "rotate(-2deg)",
-                  padding: "28px",
-                  opacity: 0.5,
-                  zIndex: 1,
-                }}
-              />
-
-              {/* Card 2 — middle */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: "20px",
-                  left: "10px",
-                  right: "10px",
-                  minHeight: "280px",
-                  backgroundColor: "#F0EDE6",
-                  border: "1px solid #E2E0DA",
-                  transform: "rotate(-1deg)",
-                  padding: "28px",
-                  zIndex: 2,
-                }}
-              />
-
-              {/* Card 3 — top, front */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: "0",
-                  left: "0",
-                  right: "0",
+                  opacity: visible ? 1 : 0,
+                  transition: "opacity 0.4s ease",
                   backgroundColor: "#FFFFFF",
                   border: "1px solid #E2E0DA",
                   padding: "28px",
                   boxShadow: "0 20px 60px rgba(0,0,0,0.08)",
-                  zIndex: 3,
                 }}
               >
                 {/* Avatar + name */}
@@ -170,7 +178,7 @@ export function HeroSection() {
                       flexShrink: 0,
                     }}
                   >
-                    SC
+                    {t.initials}
                   </div>
                   <div>
                     <p
@@ -182,7 +190,7 @@ export function HeroSection() {
                         margin: 0,
                       }}
                     >
-                      Sarah Chen
+                      {t.name}
                     </p>
                     <p
                       style={{
@@ -192,7 +200,7 @@ export function HeroSection() {
                         margin: 0,
                       }}
                     >
-                      VP of Operations, Meridian Health
+                      {t.role}
                     </p>
                   </div>
                 </div>
@@ -211,7 +219,7 @@ export function HeroSection() {
                     marginBottom: "16px",
                   }}
                 >
-                  &ldquo;AUSH reduced our manual processing time by 73% in the first quarter.&rdquo;
+                  &ldquo;{t.quote}&rdquo;
                 </p>
 
                 {/* Stars */}
@@ -219,8 +227,8 @@ export function HeroSection() {
                   style={{
                     color: "#D4A853",
                     fontSize: "14px",
-                    marginBottom: "16px",
                     letterSpacing: "2px",
+                    marginBottom: "16px",
                   }}
                 >
                   ★★★★★
@@ -237,14 +245,29 @@ export function HeroSection() {
                     margin: 0,
                   }}
                 >
-                  Healthcare · AI Pipeline
+                  {t.tag}
                 </p>
               </div>
+            </div>
 
+            {/* Dot indicators */}
+            <div style={{ display: "flex", gap: "8px" }}>
+              {testimonials.map((_, i) => (
+                <div
+                  key={i}
+                  style={{
+                    width: "8px",
+                    height: "8px",
+                    borderRadius: "50%",
+                    backgroundColor: i === index ? "#0A0A0A" : "#E2E0DA",
+                    transition: "background-color 0.3s ease",
+                  }}
+                />
+              ))}
             </div>
 
             {/* Trust badges */}
-            <div style={{ display: "flex", gap: "8px", width: "100%" }}>
+            <div style={{ display: "flex", gap: "8px" }}>
               {["50+ Enterprise Projects", "98% Client Retention"].map((label) => (
                 <div
                   key={label}
