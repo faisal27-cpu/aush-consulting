@@ -132,8 +132,6 @@ export function ServicesGrid() {
                   whiteSpace: "nowrap",
                   paddingTop: "5px",
                 }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.opacity = "0.6" }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.opacity = "1" }}
               >
                 Learn more →
               </Link>
